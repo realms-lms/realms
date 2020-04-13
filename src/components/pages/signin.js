@@ -7,7 +7,7 @@ import { withFirebase } from '../services/Firebase';
 
 import * as ROUTES from '../../constants/routes';
 
-const SignInPage = (props) => {
+const SignIn = (props) => {
     const [ email, setEmail ] = useState('');
     const [ password, setPassword ] = useState('');
     const [ error, setError ] = useState(null);
@@ -33,10 +33,15 @@ const SignInPage = (props) => {
         else if (event.target.name === "password") {
             setPassword(event.target.value);
         }
+        else if (event.target.name === "error") {
+            setError(event.target.value);
+        }
     };
 
+    const invalid = email === '' || password === '';
+
     return (
-        <Container className="SignInPage">
+        <Container className="SignIn">
             <Form onSubmit={onSubmit}>
                 <Form.Group controlId="email">
                     <Form.Control
@@ -56,7 +61,7 @@ const SignInPage = (props) => {
                         placeholder="Password"
                     />
                 </Form.Group>
-                <Button variant="primary" type="submit">Sign In</Button>
+                <Button variant="primary" type="submit" disabled={invalid}>Sign In</Button>
                 <Form.Text>Don't have an account? <Link to={ROUTES.SIGNUP}>Get started here.</Link></Form.Text>
                 <Form.Text>Forgot your password? <Link to={ROUTES.FORGOTPASSWORD}>We can help with that.</Link></Form.Text>
                 {error && <Form.Text className="error-text">{error.message}</Form.Text>}
@@ -65,4 +70,4 @@ const SignInPage = (props) => {
     );
 };
 
-export default withFirebase(SignInPage);
+export default withFirebase(SignIn);

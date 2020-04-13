@@ -22,11 +22,15 @@ export const session = (Component) => {
 
         componentDidMount() {
             this.mounted = true;
+
+            this.props.firebase.doGetOrganization('', this.configureAT.bind(this));
+
             this.authStateListener = this.props.firebase.auth.onAuthStateChanged((authUser) => {
                 if (authUser) {
                     this.setState({
                         session: {
                             authUser: authUser,
+                            userProfile: this.state.session.userProfile,
                         },
                     });
                     this.props.airTable.doGetUserProfile(authUser.email, this.onUserProfileChanged.bind(this));
@@ -35,6 +39,7 @@ export const session = (Component) => {
                     this.setState({
                         session: {
                             authUser: null,
+                            userProfile: this.state.session.userProfile,
                         },
                     });
                     this.onUserProfileChanged(null);
@@ -47,11 +52,17 @@ export const session = (Component) => {
             this.authStateListener();
         }
 
+        configureAT(data) {
+            var config = data.airTableApiConfig;
+            this.props.airTable.configure(config);
+        }
+
         onUserProfileChanged(userProf) {
             if (this.mounted) {
                 if (userProf) {
                     this.setState({
                         session: {
+                            authUser: this.state.session.authUser,
                             userProfile: userProf,
                         },
                     });
@@ -59,6 +70,7 @@ export const session = (Component) => {
                 else {
                     this.setState({
                         session: {
+                            authUser: this.state.session.authUser,
                             userProfile: null,
                         },
                     });

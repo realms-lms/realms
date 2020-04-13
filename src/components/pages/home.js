@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 
 // Services
 import { SessionContext } from '../services/Session';
@@ -7,13 +7,13 @@ import { SessionContext } from '../services/Session';
 import SignInPage from './signin';
 
 const HomePage = () => {
+    const session = useContext(SessionContext);
+
     return (
         <div className="HomePage">
-            <SessionContext.Consumer>
-                {session => session.authUser
-                ? <p>Show Home</p>
-                : <SignInPage /> }
-            </SessionContext.Consumer>
+            {session.authUser
+            ? <p>HomePage works!</p>
+            : <SignInPage />}
         </div>
     );
 };

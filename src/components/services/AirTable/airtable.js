@@ -5,6 +5,8 @@ class AirTable {
         this.configured = false;
         this.base = null;
 
+        this.backlog = [];
+
         this.onUserProfileUpdateCallback = null;
     }
 
@@ -15,11 +17,20 @@ class AirTable {
         });
         this.base = at.base(config.baseId);
         this.configured = true;
+
+        this.backlog.forEach((item) => {
+            item.func(...item.args);
+        });
+        this.backlog = [];
     }
 
     doGetSinglePageById = (pageId, callBack) => {
         if (!this.configured) {
-            console.error('AirTable API has not been configured yet.');
+            console.error('AirTable API has not been configured yet. Adding call to backlog.');
+            this.backlog.push({
+                func: this.doGetSinglePageById,
+                args: [ pageId, callBack ],
+            });
             return;
         }
 
@@ -36,6 +47,10 @@ class AirTable {
     doCreateUserRecord = (firstName, lastName, email, orgCode) => {
         if (!this.configured) {
             console.error('AirTable API has not been configured yet.');
+            this.backlog.push({
+                func: this.doCreateUserRecord,
+                args: [ firstName, lastName, email, orgCode ],
+            });
             return;
         }
         
@@ -59,6 +74,10 @@ class AirTable {
     doGetUserProfile = (email, callBack) => {
         if (!this.configured) {
             console.error('AirTable API has not been configured yet.');
+            this.backlog.push({
+                func: this.doGetUserProfile,
+                args: [ email, callBack ],
+            });
             return;
         }
         
@@ -83,6 +102,10 @@ class AirTable {
     doSetUserOrganization = (email, org) => {
         if (!this.configured) {
             console.error('AirTable API has not been configured yet.');
+            this.backlog.push({
+                func: this.doSetUserOrganization,
+                args: [ email, org ],
+            });
             return;
         }
         

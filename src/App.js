@@ -12,7 +12,10 @@ import Header from './components/header';
 
 // Pages
 import HomePage from './components/pages/home';
-import SignInPage from './components/pages/signin';
+import SignIn from './components/pages/signin';
+import SignUp from './components/pages/signup';
+import ForgotPassword from './components/pages/forgotpassword';
+import CreateOrganization from './components/pages/createorg';
 
 
 const App = () => {
@@ -23,7 +26,10 @@ const App = () => {
       
       <Switch>
         <Route exact path={ROUTES.ROOT} component={HomePage} />
-        <Route path={ROUTES.SIGNIN} component={SignInPage} />
+        <Route path={ROUTES.SIGNIN} component={SignIn} />
+        <Route path={ROUTES.SIGNUP} component={SignUp} />
+        <Route path={ROUTES.FORGOTPASSWORD} component={ForgotPassword} />
+        <Route path={ROUTES.CREATEORG} component={CreateOrganization} />
       </Switch>
     </div>
     </Router>

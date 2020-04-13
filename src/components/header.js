@@ -1,10 +1,13 @@
 import React from 'react';
 import { Navbar, Nav, NavDropdown } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 
 import logo from '../img/logo.svg';
 
 // Services
 import { withFirebase } from './services/Firebase';
+
+import * as ROUTES from '../constants/routes';
 
 const Header = (props) => {
     return (
@@ -23,10 +26,10 @@ const Header = (props) => {
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="ml-auto">
-                        <Nav.Link href="#home">Home</Nav.Link>
-                        <Nav.Link href="#1">Page 1</Nav.Link>
-                        <Nav.Link href="#2">Page 2</Nav.Link>
-                        <Nav.Link href="#3">Page 3</Nav.Link>
+                        <Nav.Link as={Link} to={ROUTES.ROOT}>Home</Nav.Link>
+                        <Nav.Link as={Link} to="#1">Page 1</Nav.Link>
+                        <Nav.Link as={Link} to="#2">Page 2</Nav.Link>
+                        <Nav.Link as={Link} to="#3">Page 3</Nav.Link>
                         <NavDropdown title="Dropdown" id="basic-nav-dropdown">
                             <NavDropdown.Item href="#4-1">Item 1</NavDropdown.Item>
                             <NavDropdown.Item href="#4-2">Item 2</NavDropdown.Item>

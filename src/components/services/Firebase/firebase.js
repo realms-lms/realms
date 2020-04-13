@@ -47,19 +47,33 @@ class Firebase {
     };
 
     doGetOrganization = (orgCode, callback) => {
-        this.db.collection('organizations').doc(orgCode).get()
-            .then((doc) => {
-                if (doc.exists) {
-                    callback(doc.data());
+        this.db.collection('organizations').get()
+            .then((querySnapshot) => {
+                if (querySnapshot.size === 1) {
+                    callback(querySnapshot.docs[0].data());
                 }
                 else {
-                    callback(null);
+                    querySnapshot.forEach((doc) => {
+                        if (doc.id === orgCode) {
+                            callback(doc.data());
+                        }
+                    });
                 }
             })
             .catch((err) => {
                 console.error(err);
             });
     };
+
+    doGetOrganizationCount = (callback) => {
+        this.db.collection('organizations').get()
+            .then((querySnapshot) => {
+                callback(querySnapshot.size);
+            })
+            .catch((err) => {
+                console.error(err);
+            });
+    }
 }
 
 export default Firebase;
