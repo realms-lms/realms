@@ -29,7 +29,7 @@ const Header = (props) => {
                         <Nav.Link as={Link} to={ROUTES.ROOT}>Home</Nav.Link>
                         <Nav.Link as={Link} to="#1">Page 1</Nav.Link>
                         <Nav.Link as={Link} to="#2">Page 2</Nav.Link>
-                        <Nav.Link as={Link} to="#3">Page 3</Nav.Link>
+                        <Nav.Link as={Link} to={ROUTES.FORUM}>Forum</Nav.Link>
                         <NavDropdown title="Dropdown" id="basic-nav-dropdown">
                             <NavDropdown.Item href="#4-1">Item 1</NavDropdown.Item>
                             <NavDropdown.Item href="#4-2">Item 2</NavDropdown.Item>

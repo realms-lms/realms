@@ -16,6 +16,7 @@ import SignIn from './components/pages/signin';
 import SignUp from './components/pages/signup';
 import ForgotPassword from './components/pages/forgotpassword';
 import CreateOrganization from './components/pages/createorg';
+import Forum from './components/pages/forum';
 
 
 const App = () => {
@@ -30,6 +31,7 @@ const App = () => {
         <Route path={ROUTES.SIGNUP} component={SignUp} />
         <Route path={ROUTES.FORGOTPASSWORD} component={ForgotPassword} />
         <Route path={ROUTES.CREATEORG} component={CreateOrganization} />
+        <Route path={ROUTES.FORUM} component={Forum} />
       </Switch>
     </div>
     </Router>

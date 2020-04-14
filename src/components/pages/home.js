@@ -5,6 +5,7 @@ import { SessionContext } from '../services/Session';
 
 // Components
 import SignInPage from './signin';
+import Hub from './hub';
 
 const HomePage = () => {
     const session = useContext(SessionContext);
@@ -12,7 +13,7 @@ const HomePage = () => {
     return (
         <div className="HomePage">
             {session.authUser
-            ? <p>HomePage works!</p>
+            ? <Hub />
             : <SignInPage />}
         </div>
     );

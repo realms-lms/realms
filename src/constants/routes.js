@@ -3,3 +3,4 @@ export const SIGNIN = "/signin";
 export const SIGNUP = "/signup";
 export const FORGOTPASSWORD = "/forgotpassword";
 export const CREATEORG = "/createorganization";
+export const FORUM = "/forum";

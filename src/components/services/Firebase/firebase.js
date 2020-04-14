@@ -74,6 +74,20 @@ class Firebase {
                 console.error(err);
             });
     }
+
+    doGetAllOrganizations = (callback) => {
+        this.db.collection('organizations').get()
+            .then((querySnapshot) => {
+                var docs = [];
+                querySnapshot.forEach((doc) => {
+                    docs.push(doc.data());
+                });
+                callback(docs);
+            })
+            .catch((err) => {
+                console.error(err);
+            });
+    }
 }
 
 export default Firebase;
